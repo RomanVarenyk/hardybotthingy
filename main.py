@@ -26,7 +26,16 @@ async def on_member_remove(member):
     await channel.send(f'{member} has lefts.')
 
 @client.event
-async def on_member_ban(member):
-    print(f'{member} has been banned by ')
+async def on_member_ban(guild, member):
+    logs = await guild.audit_logs(limit=1, action=discord.AuditLogAction.ban).flatten()
+    logs = logs[0]
+    if logs.target == member:
+        print(f'{logs.user} has just banned {logs.target} (The time is {logs.created_at}), and their reason for doing so is {logs.reason}')
+
+
+
+
+
+
 
 client.run('ODM4OTAyOTMzOTg1Njg5NjEw.YJB3PQ.KLqjsVUQkiobUxxesHiziXQ4h0I')
