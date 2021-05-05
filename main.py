@@ -44,11 +44,13 @@ async def pd(ctx, member: discord.Member = None):
     role = ctx.guild.get_role(839295332730142731)  # role ID goes there
     await member.add_roles(role)
     await ctx.send(f"Successfully gave {member} the {role.name} role!")
+    print(f"Successfully gave {member} the {role.name} role!")
+
 
 
 @client.command()
 async def ping(ctx):
     await ctx.send('The ping is ' + str(round(client.latency, 7)))
-
+    print('The ping is ' + str(round(client.latency, 7)))
 
 client.run('ODM4OTAyOTMzOTg1Njg5NjEw.YJB3PQ.Y7axtdIsXn9zHEaCITirZIfX_XE')
