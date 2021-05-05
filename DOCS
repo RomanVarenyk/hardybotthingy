@@ -1,0 +1,8 @@
+async def on_ready(): 
+
+this is an event that activates when the bot is connected and ready to work. 
+
+async def on_member_join(member):
+
+this is an event that activates when a member joins the server and says that the member joined alng with printing it in console.
+
