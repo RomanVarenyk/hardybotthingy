@@ -74,6 +74,17 @@ async def ping(ctx):
 async def kick(ctx, member: discord.Member, *, reason=None):
     await member.kick(reason=reason)
     await member.send(f'You were kicked from hardy ms discord for {reason}')
+    print(f'{member} was kicked for: {reason}')
+
+@client.command()
+async def ban(ctx, member: discord.Member, *, reason=None):
+    await member.ban(reason=reason)
+    await member.send(f'You were ban from hardy ms discord for {reason}')
+    print(f'{member} was banned for: {reason}')
+
+@client.command()
+async def suggestion(ctx, member, *, suggestions):
+    print(f'{ctx.author} suggested: {suggestions}')
 
 
 client.run('ODM4OTAyOTMzOTg1Njg5NjEw.YJB3PQ.Y7axtdIsXn9zHEaCITirZIfX_XE')
