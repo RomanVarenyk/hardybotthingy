@@ -5,4 +5,13 @@ this is an event that activates when the bot is connected and ready to work.
 async def on_member_join(member):
 
 this is an event that activates when a member joins the server and says that the member joined alng with printing it in console.
+a member variable is passed in to signal who was the member who joined.
+
+async def on_member_remove(member):
+this is an event that executes when a member leaves for whatever reason. A message is then sent in console and in the server about it
+a member variable is passed in to signal who was the member who left.
+
+async def on_member_ban(guild, member):
+this is an event which actiavates when a member is banned. A guild which is the server where it was executed is passed in along with member who is the person or bot banned
+it then gets the event from audit log, and makes sure it is the correct one then printing it
 
