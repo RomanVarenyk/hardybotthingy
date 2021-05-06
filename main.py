@@ -1,6 +1,5 @@
 import discord
-from discord import message
-from discord.ext import commands
+from discord.ext import commands, tasks
 
 intents = discord.Intents.default()
 intents.members = True
@@ -12,6 +11,7 @@ client = commands.Bot(command_prefix=".", intents=intents)
 
 @client.event
 async def on_ready():
+    await client.change_presence(status=discord.Status.online, activity=discord.Game('Playing with your mom'))
     print('Startup succesful')
 
 
@@ -68,23 +68,42 @@ async def ping(ctx):
     print('The ping is ' + str(round(client.latency, 7)))
 
 
-
-
 @client.command()
+@commands.has_role('Approved')
 async def kick(ctx, member: discord.Member, *, reason=None):
     await member.kick(reason=reason)
     await member.send(f'You were kicked from hardy ms discord for {reason}')
     print(f'{member} was kicked for: {reason}')
 
+
 @client.command()
+@commands.has_role('Approved')
 async def ban(ctx, member: discord.Member, *, reason=None):
     await member.ban(reason=reason)
     await member.send(f'You were ban from hardy ms discord for {reason}')
     print(f'{member} was banned for: {reason}')
 
+
 @client.command()
+@commands.has_role('Approved')
 async def suggestion(ctx, member, *, suggestions):
     print(f'{ctx.author} suggested: {suggestions}')
 
+
+@client.command()
+@commands.has_role('Approved')
+async def unban(ctx, *, memberid):
+    memberidint = int(memberid)
+    bannedusers = await ctx.guild.bans()
+    print(bannedusers)
+    for ban_entry in bannedusers:
+        user = ban_entry.user
+        print(user.id)
+        if user.id == memberidint:
+            await ctx.guild.unban(user)
+            print(f'{memberidint} was unbanned by {ctx.author}')
+            break
+        else:
+            print(f'{memberidint} was not found or is not banned')
 
 client.run('ODM4OTAyOTMzOTg1Njg5NjEw.YJB3PQ.Y7axtdIsXn9zHEaCITirZIfX_XE')
