@@ -5,7 +5,7 @@ intents = discord.Intents.default()
 intents.members = True
 intents.presences = True
 intents.messages = True
-badwords = ['badwordtest']
+badwords = ['fag', 'faggot', 'nigga', 'nigger']
 client = commands.Bot(command_prefix=".", intents=intents)
 
 
@@ -18,14 +18,14 @@ async def on_ready():
 @client.event
 async def on_member_join(member):
     print(f'{member} has joined the server')
-    channel = client.get_channel(838951796386168866)
+    channel = client.get_channel(708316172310937652)
     await channel.send(f'{member} has joined.')
 
 
 @client.event
 async def on_member_remove(member):
     print(f'{member} has left the server')
-    channel = client.get_channel(838951796386168866)
+    channel = client.get_channel(708316172310937652)
     await channel.send(f'{member} has left.')
 
 
@@ -51,7 +51,7 @@ async def on_message(checkmessage):
 async def pd(ctx, member: discord.Member = None):
     if not member:
         member = ctx.author
-    role = ctx.guild.get_role(839295332730142731)  # role ID goes there
+    role = ctx.guild.get_role(819652594245828628)  # role ID goes there
     await member.add_roles(role)
     await ctx.send(f"Successfully gave {member} the {role.name} role!")
     print(f"Successfully gave {member} the {role.name} role!")
@@ -69,29 +69,32 @@ async def ping(ctx):
 
 
 @client.command()
-@commands.has_role('Approved')
+@commands.has_role('Server staff (admin)')
 async def kick(ctx, member: discord.Member, *, reason=None):
-    await member.kick(reason=reason)
     await member.send(f'You were kicked from hardy ms discord for {reason}')
     print(f'{member} was kicked for: {reason}')
+    await member.kick(reason=reason)
+
 
 
 @client.command()
-@commands.has_role('Approved')
+@commands.has_role('Server staff (admin)')
 async def ban(ctx, member: discord.Member, *, reason=None):
-    await member.ban(reason=reason)
     await member.send(f'You were ban from hardy ms discord for {reason}')
     print(f'{member} was banned for: {reason}')
+    await member.ban(reason=reason)
 
 
 @client.command()
 @commands.has_role('Approved')
-async def suggestion(ctx, member, *, suggestions):
+async def suggest(ctx, member, *, suggestions):
     print(f'{ctx.author} suggested: {suggestions}')
+    channel = client.get_channel(709569397731360822)
+    await channel.send(f'{ctx.author} suggested: {suggestions}')
 
 
 @client.command()
-@commands.has_role('Approved')
+@commands.has_role('Server staff (admin)')
 async def unban(ctx, *, memberid):
     memberidint = int(memberid)
     bannedusers = await ctx.guild.bans()
@@ -102,8 +105,17 @@ async def unban(ctx, *, memberid):
         if user.id == memberidint:
             await ctx.guild.unban(user)
             print(f'{memberidint} was unbanned by {ctx.author}')
+            channel = client.get_channel(709569397731360822)
+            await channel.send(f'{memberidint} was unbanned by {ctx.author}')
             break
         else:
             print(f'{memberidint} was not found or is not banned')
 
+@client.event
+async def on_message_delete(message):
+    print(f'{message.content} was deleted. Full string: {message}')
+
+@client.event
+async def on_message_edit(before, after):
+    print(f'{before.author} has edit the messaage from {before.content} to {after.content}. The  full string of before and after. {before} ........... and after {after}')
 client.run('ODM4OTAyOTMzOTg1Njg5NjEw.YJB3PQ.Y7axtdIsXn9zHEaCITirZIfX_XE')
