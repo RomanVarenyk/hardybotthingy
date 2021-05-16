@@ -11,7 +11,7 @@ client = commands.Bot(command_prefix=".", intents=intents)
 
 @client.event
 async def on_ready():
-    await client.change_presence(status=discord.Status.online, activity=discord.Game('Playing with your mom'))
+    await client.change_presence(status=discord.Status.online, activity=discord.Game('no idea what to put here so this is here'))
     print('Startup succesful')
 
 
