@@ -118,4 +118,7 @@ async def on_message_delete(message):
 @client.event
 async def on_message_edit(before, after):
     print(f'{before.author} has edit the messaage from {before.content} to {after.content}. The  full string of before and after. {before} ........... and after {after}')
+
+
+
 client.run('ODM4OTAyOTMzOTg1Njg5NjEw.YJB3PQ.Y7axtdIsXn9zHEaCITirZIfX_XE')
