@@ -1,0 +1,2 @@
+Startup succesful
+ The ping is 0.0510418
