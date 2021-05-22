@@ -169,4 +169,4 @@ async def on_message_edit(before, after):
 
 
 
-client.run('ODM4OTAyOTMzOTg1Njg5NjEw.YJB3PQ.Y7axtdIsXn9zHEaCITirZIfX_XE')
+client.run('TOKEN HERE')
